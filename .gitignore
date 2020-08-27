@@ -1,1 +1,8 @@
-node_modules
+#note modules dir
+/node_modules
+
+# phpstorm project files
+.idea
+
+# vscode project files
+.vscode
