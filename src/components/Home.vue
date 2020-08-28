@@ -22,14 +22,14 @@
 
 <script>
 import src1 from "../assets/联系我们.png";
-import src2 from "../assets/商品展示.png";
-import src3 from "../assets/图文分享.png";
+import src2 from "../assets/商品.png";
+import src3 from "../assets/发送.png";
 import src4 from "../assets/资讯.png";
-import src5 from "../assets/新闻资讯.png";
+import src5 from "../assets/新闻.png";
 import src6 from "../assets/关于我们.png";
-import src7 from "../assets/商品展示.png";
-import src8 from "../assets/图文分享.png";
-import src9 from "../assets/资讯.png";
+import src7 from "../assets/优惠.png";
+import src8 from "../assets/新人专享.png";
+import src9 from "../assets/研发体系补贴.png";
 
 var grids = [
   { id: 1, src: src1, title: "联系我们" },
@@ -107,5 +107,8 @@ export default {
 .list ul li a img {
   width: 50px;
   height: 55px;
+}
+.list ul li a p {
+  padding-top: 5px;
 }
 </style>
