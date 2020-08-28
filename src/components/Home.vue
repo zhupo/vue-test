@@ -24,7 +24,7 @@
 import src1 from "../assets/联系我们.png";
 import src2 from "../assets/商品.png";
 import src3 from "../assets/发送.png";
-import src4 from "../assets/资讯.png";
+import src4 from "../assets/留言.png";
 import src5 from "../assets/新闻.png";
 import src6 from "../assets/关于我们.png";
 import src7 from "../assets/优惠.png";
@@ -35,7 +35,7 @@ var grids = [
   { id: 1, src: src1, title: "联系我们" },
   { id: 2, src: src2, title: "商品展示" },
   { id: 3, src: src3, title: "图文分享" },
-  { id: 4, src: src4, title: "资讯" },
+  { id: 4, src: src4, title: "留言反馈" },
   { id: 5, src: src5, title: "新闻资讯" },
   { id: 6, src: src6, title: "关于我们" },
   { id: 7, src: src7, title: "优惠区" },
@@ -80,7 +80,11 @@ export default {
 <style scoped>
 .mt-swipe {
   width: 100%;
-  height: 200px;
+  height: 230px;
+}
+.mt-swipe img {
+  width: 100%;
+  height: 100%;
 }
 .list {
   width: 100%;
@@ -105,8 +109,8 @@ export default {
   color: black;
 }
 .list ul li a img {
-  width: 50px;
-  height: 55px;
+  width: 45px;
+  height: 45px;
 }
 .list ul li a p {
   padding-top: 5px;

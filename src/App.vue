@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <!-- 顶部栏区域 -->
-    <mt-header title="信息管理系统">
+    <mt-header :fixed="fixed" title="信息管理系统">
       <router-link to="/" slot="left">
         <mt-button icon="back">返回</mt-button>
       </router-link>
@@ -12,7 +12,7 @@
     <router-view />
 
     <!-- 底部栏 -->
-    <mt-tabbar v-model="selected">
+    <mt-tabbar v-model="selected" :fixed="fixed">
       <mt-tab-item id="home">
         <img slot="icon" src="./assets/index.png" />
         首页
@@ -37,7 +37,8 @@ export default {
   name: "App",
   data() {
     return {
-      selected: ""
+      selected: "",
+      fixed: true
     };
   },
   watch: {

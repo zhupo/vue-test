@@ -89,7 +89,7 @@ module.exports = {
   devServer: {
     proxy: {
       "/api": {
-        target: "http://photo-frontend:8081",
+        target: "http://photo-frontend",
         // ws: true,
         changeOrigin: true //开启代理，在本地创建一个虚拟服务端
       }
