@@ -31,13 +31,13 @@ module.exports = {
   parallel: require("os").cpus().length > 1,
   // crossorigin: undefined,
   integrity: false,
-  configureWebpack: config => {
-    if (process.env.NODE_ENV === "production") {
-      // 为生产环境修改配置...
-    } else {
-      // 为开发环境修改配置...
-    }
-  },
+  // configureWebpack: config => {
+  //   if (process.env.NODE_ENV === "production") {
+  //     // 为生产环境修改配置...
+  //   } else {
+  //     // 为开发环境修改配置...
+  //   }
+  // },
   chainWebpack: config => {
     config.module
       .rule("vue")
@@ -92,9 +92,8 @@ module.exports = {
         target: "http://photo-frontend:8081",
         // ws: true,
         changeOrigin: true //开启代理，在本地创建一个虚拟服务端
-
       }
     }
     // proxy: "http://photo-frontend:8081/api"
   }
-}
+};
