@@ -9,8 +9,8 @@ export default {
   name: "ShopCart",
   data() {
     return {
-      msg: '我是购物车页面'
-    }
+      msg: "我是购物车页面"
+    };
   }
   // props: {
   //   msg: String
@@ -19,5 +19,4 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-</style>
+<style scoped></style>
