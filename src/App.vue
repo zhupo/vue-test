@@ -1,12 +1,14 @@
 <template>
   <div id="app">
     <!-- 顶部栏区域 -->
-    <mt-header :fixed="fixed" title="信息管理系统">
-      <router-link to="/" slot="left">
-        <mt-button icon="back">返回</mt-button>
-      </router-link>
-      <mt-button icon="more" slot="right"></mt-button>
-    </mt-header>
+    <div id="header">
+      <mt-header :fixed="fixed" title="信息管理系统">
+        <router-link to="/" slot="left">
+          <mt-button icon="back">返回</mt-button>
+        </router-link>
+        <mt-button icon="more" slot="right"></mt-button>
+      </mt-header>
+    </div>
 
     <!-- 路由组件的出口 -->
     <router-view />

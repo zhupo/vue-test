@@ -1,9 +1,10 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../components/Home.vue";
-import Vip from "../components/Vip";
-import ShopCart from "../components/ShopCart";
-import Mine from "../components/Mine";
+import Home from "@components/Home/Home";
+import Vip from "@components/Vip/Vip";
+import ShopCart from "@components/Cart/ShopCart";
+import Mine from "@components/Mine/Mine";
+import NewList from "@components/New/NewList";
 
 Vue.use(VueRouter);
 
@@ -31,6 +32,11 @@ const routes = [
     path: "/mine",
     name: "mine",
     component: Mine
+  },
+  {
+    path: "/new-list",
+    name: "news.list",
+    component: NewList
   }
 ];
 

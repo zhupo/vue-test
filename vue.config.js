@@ -1,3 +1,5 @@
+const path = require("path");
+const resolve = dir => path.join(__dirname, dir);
 module.exports = {
   publicPath: "./",
   outputDir: "dist",
@@ -39,14 +41,21 @@ module.exports = {
   //   }
   // },
   chainWebpack: config => {
-    config.module
-      .rule("vue")
-      .use("vue-loader")
-      .loader("vue-loader")
-      .tap(options => {
-        // 修改它的选项...
-        return options;
-      });
+    // config.module
+    //   .rule("vue")
+    //   .use("vue-loader")
+    //   .loader("vue-loader")
+    //   .tap(options => {
+    //     // 修改它的选项...
+    //     return options;
+    //   });
+    config.resolve.alias
+      .set("vue$", "vue/dist/vue.esm.js")
+      .set("@", resolve("src"))
+      .set("@assets", resolve("src/assets"))
+      .set("@components", resolve("src/components"))
+      .set("@views", resolve("src/views"))
+      .set("@router", resolve("src/router"));
   },
   css: {
     requireModuleExtension: false,
