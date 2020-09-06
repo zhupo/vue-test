@@ -6,3 +6,6 @@
 
 # vscode project files
 .vscode
+
+# config
+vue.config.js
