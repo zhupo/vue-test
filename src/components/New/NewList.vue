@@ -6,7 +6,7 @@
         <li>
           <a href="#">
             <div class="new_img">
-              <img src="../../assets/logo.png" alt= />
+              <img src="../../assets/中国.png" alt="" />
             </div>
             <div class="content">
               <p class="title">我爱你中国</p>
@@ -42,7 +42,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 * {
-  padding-top: 5px;
+  padding-top: 1px;
 }
 .news {
   padding-bottom: 100px;
@@ -64,11 +64,15 @@ export default {
   text-decoration: none;
 }
 .new_img {
-  width: 30%;
+  width: 20%;
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.content {
+  width: 80%;
+  margin-left: 60px;
 }
 .content .title {
   font-size: 15px;
