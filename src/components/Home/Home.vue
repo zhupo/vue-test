@@ -11,7 +11,7 @@
       <ul>
         <li v-for="(grid, index) in grids" :key="index">
           <router-link :to="grid.router">
-            <img :src="grid.src" alt />
+            <img :src="grid.url" alt />
             <p>{{ grid.title }}</p>
           </router-link>
         </li>
@@ -21,42 +21,15 @@
 </template>
 
 <script>
-import src1 from "../../assets/联系我们.png";
-import src2 from "../../assets/商品.png";
-import src3 from "../../assets/发送.png";
-import src4 from "../../assets/留言.png";
-import src5 from "../../assets/新闻.png";
-import src6 from "../../assets/关于我们.png";
-import src7 from "../../assets/优惠.png";
-import src8 from "../../assets/新人专享.png";
-import src9 from "../../assets/研发体系补贴.png";
-
-var grids = [
-  { id: 1, src: src1, title: "联系我们", router: { name: "news.list" } },
-  { id: 2, src: src2, title: "商品展示", router: { name: "news.list" } },
-  { id: 3, src: src3, title: "图文分享", router: { name: "news.list" } },
-  { id: 4, src: src4, title: "留言反馈", router: { name: "news.list" } },
-  { id: 5, src: src5, title: "新闻资讯", router: { name: "news.list" } },
-  { id: 6, src: src6, title: "关于我们", router: { name: "news.list" } },
-  { id: 7, src: src7, title: "优惠区", router: { name: "news.list" } },
-  { id: 8, src: src8, title: "新人专享", router: { name: "news.list" } },
-  { id: 9, src: src9, title: "百亿补贴", router: { name: "news.list" } }
-];
-
 export default {
   name: "Home",
   data() {
     return {
       images: [
-        {
-          url: require("../../assets/carousel-01.jpg")
-        },
-        {
-          url: require("../../assets/carousel-02.jpg")
-        }
+
       ],
       baseUrl: location.origin,
-      grids: grids
+      grids: []
     };
   },
   components: {
@@ -67,10 +40,19 @@ export default {
       .get("/api/images")
       .then(res => {
         console.log(res.data.items);
-        // this.images = res.data.items
+        this.images = res.data.items;
       })
       .catch(err => {
         console.log(err);
+      });
+
+    this.$axios
+      .get("/api/images/show-off")
+      .then(res => {
+        this.grids = res.data.items
+      })
+      .catch(err => {
+        console.log(err)
       });
   }
 };
