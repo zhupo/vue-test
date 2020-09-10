@@ -25,9 +25,7 @@ export default {
   name: "Home",
   data() {
     return {
-      images: [
-
-      ],
+      images: [],
       baseUrl: location.origin,
       grids: []
     };
@@ -49,10 +47,10 @@ export default {
     this.$axios
       .get("/api/images/show-off")
       .then(res => {
-        this.grids = res.data.items
+        this.grids = res.data.items;
       })
       .catch(err => {
-        console.log(err)
+        console.log(err);
       });
   }
 };
