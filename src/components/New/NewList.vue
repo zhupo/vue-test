@@ -1,24 +1,24 @@
 <template>
-  <div class="news">
-    /
+  <div class="新闻列表">
+    <Navbar title="新闻列表" />
     <div class="newList">
       <ul>
-        <li>
-          <a href="#">
+        <li v-for="(newList) in news" :key="newList.id">
+          <router-link :to='{name:"detail", query:{id:newList.id}}'>
             <div class="new_img">
-              <img src="../../assets/中国.png" alt="" />
+              <img :src="newList.url" alt="" />
             </div>
             <div class="content">
-              <p class="title">我爱你中国</p>
+              <p class="title">{{newList.title}}</p>
               <div class="new-desc">
-                <p class="summary">我的摘要内容</p>
+                <p class="summary">{{newList.zhaiyao}}</p>
                 <p>
-                  <span class="praise">点赞数：222222</span>
-                  <span class="time">发表时间：2020-09-06</span>
+                  <span class="praise">点赞数：{{newList.click}}</span>
+                  <span class="time">发表时间：{{newList.createdAt | converTime('YYYY-MM-DD')}}</span>
                 </p>
               </div>
             </div>
-          </a>
+          </router-link>
         </li>
       </ul>
     </div>
@@ -30,22 +30,27 @@ export default {
   name: "Mine",
   data() {
     return {
-      msg: "我是新闻列表页面"
+      msg: "我是新闻列表页面",
+      news:[]
     };
+  },
+  created() {
+    this.$axios.get('api/news')
+    .then(res => {
+      this.news = res.data.items;
+      console.log(this.news);
+    })
+    .catch(err => {
+      console.log('新闻列表异常', err);
+    })
   }
-  // props: {
-  //   msg: String
-  // }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-* {
-  padding-top: 1px;
-}
 .news {
-  padding-bottom: 100px;
+  padding-bottom: 80px;
 }
 .newList {
   width: 100%;
@@ -64,15 +69,22 @@ export default {
   text-decoration: none;
 }
 .new_img {
-  width: 20%;
+  width: 150px;
+  height: 100px;
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
 }
+.new_img img {
+  width: 100%;
+  height: 100%;
+  margin-top: 20px;
+  margin-left: 10px;
+}
 .content {
   width: 80%;
-  margin-left: 60px;
+  margin-left: 40px;
 }
 .content .title {
   font-size: 15px;
@@ -90,6 +102,6 @@ export default {
   padding: 5px 0;
 }
 .time {
-  margin-left: 30px;
+  margin-left: 20px;
 }
 </style>
