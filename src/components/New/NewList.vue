@@ -3,18 +3,20 @@
     <Navbar title="新闻列表" />
     <div class="newList">
       <ul>
-        <li v-for="(newList) in news" :key="newList.id">
-          <router-link :to='{name:"detail", query:{id:newList.id}}'>
+        <li v-for="newList in news" :key="newList.id">
+          <router-link :to="{ name: 'detail', query: { id: newList.id } }">
             <div class="new_img">
-              <img :src="newList.url" alt="" />
+              <img :src="newList.url" alt />
             </div>
             <div class="content">
-              <p class="title">{{newList.title}}</p>
+              <p class="title">{{ newList.title }}</p>
               <div class="new-desc">
-                <p class="summary">{{newList.zhaiyao}}</p>
+                <p class="summary">{{ newList.zhaiyao }}</p>
                 <p>
-                  <span class="praise">点赞数：{{newList.click}}</span>
-                  <span class="time">发表时间：{{newList.createdAt | converTime('YYYY-MM-DD')}}</span>
+                  <span class="praise">点赞数：{{ newList.click }}</span>
+                  <span class="time">
+                    发表时间：{{ newList.createdAt | converTime("YYYY-MM-DD") }}
+                  </span>
                 </p>
               </div>
             </div>
@@ -31,18 +33,19 @@ export default {
   data() {
     return {
       msg: "我是新闻列表页面",
-      news:[]
+      news: []
     };
   },
   created() {
-    this.$axios.get('api/news')
-    .then(res => {
-      this.news = res.data.items;
-      console.log(this.news);
-    })
-    .catch(err => {
-      console.log('新闻列表异常', err);
-    })
+    this.$axios
+      .get("api/news")
+      .then(res => {
+        this.news = res.data.items;
+        console.log(this.news);
+      })
+      .catch(err => {
+        console.log("新闻列表异常", err);
+      });
   }
 };
 </script>

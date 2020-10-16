@@ -17,14 +17,14 @@ Vue.config.productionTip = false;
 import "../public/css/global.css";
 
 //注册全局的导航栏组件
-import Navbar from "@components/Common/Navbar"
-Vue.component(Navbar.name, Navbar)
+import Navbar from "@components/Common/Navbar";
+Vue.component(Navbar.name, Navbar);
 
 //自定义moment全局过滤器
-import Moment from "moment" 
-Vue.filter('converTime', function(date, formatStr) {
+import Moment from "moment";
+Vue.filter("converTime", function(date, formatStr) {
   return Moment(date).format(formatStr);
-})
+});
 
 new Vue({
   router,
