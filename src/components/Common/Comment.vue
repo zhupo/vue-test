@@ -37,12 +37,22 @@
 <script>
 export default {
   name: "Comment",
+  props: ['cid'],
   data() {
     return {
-
+      comments: []
     }
   },
   created() {
+    // /photos/detail?id=37&page=2
+    let page = this.$route.query.page || '1';
+    this.$axios.get(`/api/comments/${this.cid}?page=${page}`)
+    .then(res => {
+      this.comments = res.data;
+    })
+    .catch(err => {
+      console.log('获取评论数据失败', err);
+    });
   }
 }
 </script>

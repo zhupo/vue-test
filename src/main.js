@@ -32,7 +32,6 @@ Vue.filter("converTime", function(date, formatStr) {
 
 //引入preview图片查看器
 import VuePreview from 'vue-preview'
-
 // defalut install
 //内部会运行vue.component('vue-preview', {});
 Vue.use(VuePreview)

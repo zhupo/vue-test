@@ -14,7 +14,7 @@
     <router-view />
 
     <!-- 底部栏 -->
-    <div class="tabBar">
+    <div class="tabBar" :fixed="fixed">
       <ul>
         <li v-for="(tab, index) in tabs" :key="tab.id">
           <router-link :to="tab.routerName" exact @click.native="changeHash(index)" :class='{"link-active": index == currentIndex}'>
