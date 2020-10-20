@@ -60,6 +60,21 @@ export default {
         .catch(err => {
           console.log("图片列表获取失败", err);
         });
+      this.$axios.get(`api/photos?categoryId=${id}`)
+      .then(res => {
+        this.imgList = res.data;
+        if (this.imgList.length === 0) {
+          this.$toast({
+            message: '没有图片',
+            //字体
+            // iconClass: 'iconfont icon-shibail',
+            duration: 1000
+          });
+        }
+      })
+      .catch(err => {
+        console.log('图片列表获取失败', err);
+      })
     },
 
     changeHash(index, categore) {

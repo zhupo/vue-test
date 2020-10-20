@@ -29,6 +29,33 @@
         <p>111</p>
       </div>
     </div>
+<div>
+  <Navbar title="图文详情" />
+  <div class="photo-title">
+    <p>{{imgInfo.title}}</p>
+    <span>{{imgInfo.createdAt | converTime('YYYY-MM-DD') }}</span>
+    <span>{{imgInfo.click}}次浏览</span>
+    <span>分类: 民生经济</span>
+
+    <!-- <ul>
+      <li v-for="(thumImg, index) in thumImgages" :key="index">
+        <a href="javascript:void(0)">
+          <img :src="thumImg.src" alt="">
+        </a>
+      </li>
+    </ul> -->
+
+    <vue-preview :slides="thumImgages"></vue-preview>
+
+    <!-- 内容部分 -->
+    <div class="photo-desc">
+      <p v-html="imgInfo.content"></p>
+    </div>
+  
+    <!-- 评论部分 -->
+    <Comment />
+  
+
   </div>
 </template>
 
@@ -57,6 +84,18 @@ export default {
         this.thumImgages = perms.data;
       })
     );
+    this.$axios.all([getImageInfo(), getThumImages()])
+    .then(this.$axios.spread((acct, perms) => {
+      //两个请求都执行
+      this.imgInfo = acct.data;
+      this.thumImgages = perms.data;
+
+      // this.thumImgages.forEach((item) => {
+      //   item.msrc = item.src;
+      //   item.w = 500;
+      //   item.h = 400;
+      // })
+    }));
   }
 };
 </script>
