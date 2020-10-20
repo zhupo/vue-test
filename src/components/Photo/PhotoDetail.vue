@@ -1,40 +1,10 @@
 <template>
-  <div>
-    <Navbar title="图文详情" />
-    <div class="photo-title">
-      <p>{{ imgInfo.title }}</p>
-      <span>{{ imgInfo.createdAt | converTime("YYYY-MM-DD") }}</span>
-      <span>{{ imgInfo.praise }}次浏览</span>
-      <span>分类: 民生经济</span>
-
-      <ul>
-        <li v-for="(thumImg, index) in thumImgages" :key="index">
-          <a href="javascript:void(0)">
-            <img :src="thumImg.src" alt />
-          </a>
-        </li>
-      </ul>
-
-      <div class="photo-desc">
-        <p v-html="imgInfo.content"></p>
-      </div>
-
-      <div>
-        <!-- 使用评论组建 -->
-        我的评论
-        <p>111</p>
-        <p>111</p>
-        <p>111</p>
-        <p>111</p>
-        <p>111</p>
-      </div>
-    </div>
 <div>
   <Navbar title="图文详情" />
   <div class="photo-title">
     <p>{{imgInfo.title}}</p>
     <span>{{imgInfo.createdAt | converTime('YYYY-MM-DD') }}</span>
-    <span>{{imgInfo.click}}次浏览</span>
+    <span>{{imgInfo.praise}}次浏览</span>
     <span>分类: 民生经济</span>
 
     <!-- <ul>
@@ -57,6 +27,7 @@
   
 
   </div>
+</div>
 </template>
 
 <script>
