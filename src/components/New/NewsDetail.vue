@@ -4,7 +4,7 @@
     <div class="item">
       <p>{{ detail.title }}</p>
       <div>
-        <span>{{ detail.click }}次点击</span>
+        <span>{{ detail.praise }}次点击</span>
         <span>分类：民生科技</span>
         <span>添加时间：{{ detail.createdAt | converTime("YYYY-MM-DD") }}</span>
       </div>

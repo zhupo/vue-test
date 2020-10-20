@@ -11,9 +11,9 @@
             <div class="content">
               <p class="title">{{ newList.title }}</p>
               <div class="new-desc">
-                <p class="summary">{{ newList.zhaiyao }}</p>
+                <p class="summary">{{ newList.summary }}</p>
                 <p>
-                  <span class="praise">点赞数：{{ newList.click }}</span>
+                  <span class="praise">点赞数：{{ newList.praise }}</span>
                   <span class="time">
                     发表时间：{{ newList.createdAt | converTime("YYYY-MM-DD") }}
                   </span>

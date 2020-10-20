@@ -4,7 +4,7 @@
     <div class="photo-title">
       <p>{{ imgInfo.title }}</p>
       <span>{{ imgInfo.createdAt | converTime("YYYY-MM-DD") }}</span>
-      <span>{{ imgInfo.click }}次浏览</span>
+      <span>{{ imgInfo.praise }}次浏览</span>
       <span>分类: 民生经济</span>
 
       <ul>
@@ -45,10 +45,10 @@ export default {
     let id = this.$route.query.id;
     var getImageInfo = () => {
       //如果使用普通函数申明，当前this为undefined，建议使用箭头函数改变当前this的指向
-      return this.$axios.get(`api/photos/${id}/info`);
+      return this.$axios.get(`api/photos/${id}`);
     };
     var getThumImages = () => {
-      return this.$axios.get(`api/photos/${id}/thum`);
+      return this.$axios.get(`api/photos/${id}/thumbnail`);
     };
     this.$axios.all([getImageInfo(), getThumImages()]).then(
       this.$axios.spread((acct, perms) => {
