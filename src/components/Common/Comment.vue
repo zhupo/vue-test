@@ -1,60 +1,57 @@
 <template>
-<div class="tmp1">
-  <div class="photo-bottom">
-    <ul>
-      <li class="photo-comment">
-        <div>
-          <span>提交评论</span>
-          <span><a>返回</a></span>
-        </div>
-      </li>
-      <li class="txt-comment">
-        <textarea cols="50" rows="10"></textarea>
-      </li>
-      <li>
-        发表评论按钮
-      </li>
-      <li class="photo-comment">
-        <div>
-          <span>评论列表</span>
-          <span>44条评论</span>
-        </div>
-      </li>
-    </ul>
-    <ul class="comment-list">
-      <li>
-        匿名用户1:大家好 2014-01-04
-      </li>
-      <li>
-        匿名用户2:大家好 2014-01-04
-      </li>
-    </ul>
-    加载更多按钮
+  <div class="tmp1">
+    <div class="photo-bottom">
+      <ul>
+        <li class="photo-comment">
+          <div>
+            <span>提交评论</span>
+            <span>
+              <a>返回</a>
+            </span>
+          </div>
+        </li>
+        <li class="txt-comment">
+          <textarea cols="50" rows="10"></textarea>
+        </li>
+        <li>发表评论按钮</li>
+        <li class="photo-comment">
+          <div>
+            <span>评论列表</span>
+            <span>44条评论</span>
+          </div>
+        </li>
+      </ul>
+      <ul class="comment-list">
+        <li>匿名用户1:大家好 2014-01-04</li>
+        <li>匿名用户2:大家好 2014-01-04</li>
+      </ul>
+      加载更多按钮
+    </div>
   </div>
-</div>
 </template>
 
 <script>
 export default {
   name: "Comment",
-  props: ['cid'],
+  props: ["cid"],
   data() {
     return {
       comments: []
-    }
+    };
   },
   created() {
     // /photos/detail?id=37&page=2
-    let page = this.$route.query.page || '1';
-    this.$axios.get(`/api/comments/${this.cid}?page=${page}`)
-    .then(res => {
-      this.comments = res.data;
-    })
-    .catch(err => {
-      console.log('获取评论数据失败', err);
-    });
+    let page = this.$route.query.page || "1";
+    this.$axios
+      .get(`/api/comments/${this.cid}?page=${page}`)
+      .then(res => {
+        this.comments = res.data;
+      })
+      .catch(err => {
+        console.log("获取评论数据失败", err);
+      });
   }
-}
+};
 </script>
 
 <style>

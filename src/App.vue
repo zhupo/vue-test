@@ -17,9 +17,14 @@
     <div class="tabBar" :fixed="fixed">
       <ul>
         <li v-for="(tab, index) in tabs" :key="tab.id">
-          <router-link :to="tab.routerName" exact @click.native="changeHash(index)" :class='{"link-active": index == currentIndex}'>
-            <img :src="tab.imgSrc" alt="">
-            <p>{{tab.title}}</p>
+          <router-link
+            :to="tab.routerName"
+            exact
+            @click.native="changeHash(index)"
+            :class="{ 'link-active': index == currentIndex }"
+          >
+            <img :src="tab.imgSrc" alt />
+            <p>{{ tab.title }}</p>
           </router-link>
         </li>
       </ul>
@@ -41,11 +46,10 @@
         <img slot="icon" src="./assets/mine.png" />
         我的
       </mt-tab-item>
-    </mt-tabbar> -->
+    </mt-tabbar>-->
   </div>
 </template>
 <script>
-
 import index from "@assets/index.png";
 import vip from "@assets/member.png";
 import shopcart from "@assets/shopping-cart.png";
@@ -55,23 +59,25 @@ let tabs = [
     id: 1,
     title: "首页",
     imgSrc: index,
-    routerName: {name: "home" }
+    routerName: { name: "home" }
   },
   {
     id: 2,
     title: "会员",
     imgSrc: vip,
-    routerName: {name: "vip" }
-  },{
+    routerName: { name: "vip" }
+  },
+  {
     id: 3,
     title: "购物车",
     imgSrc: shopcart,
-    routerName: {name: "shopcart" }
-  },{
+    routerName: { name: "shopcart" }
+  },
+  {
     id: 4,
     title: "我的",
     imgSrc: mine,
-    routerName: {name: "mine" }
+    routerName: { name: "mine" }
   }
 ];
 
@@ -103,11 +109,16 @@ export default {
 .tabBar {
   width: 100%;
   height: 55px;
-  background-color:#cccccc;
+  background-color: #cccccc;
   position: absolute;
   left: 0;
   bottom: 0;
-  background-image: linear-gradient(180deg, #d9d9d9,#d9d9d9 50%, transparent 50%);
+  background-image: linear-gradient(
+    180deg,
+    #d9d9d9,
+    #d9d9d9 50%,
+    transparent 50%
+  );
   background-size: 100% 1px;
   background-repeat: no-repeat;
   background-position: top left;
@@ -125,12 +136,12 @@ export default {
 }
 .tabBar ul li a {
   display: inline-block;
-  width:100%;
+  width: 100%;
   height: 100%;
   padding-top: 10px;
 }
 .tabBar ul li a.link-active {
-  background-color: #CCFF66;
+  background-color: #ccff66;
 }
 .tabBar ul li p {
   font-size: 12px;
