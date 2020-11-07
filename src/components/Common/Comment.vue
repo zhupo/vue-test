@@ -1,5 +1,4 @@
 <template>
-<div class="tmp1">
   <div class="photo-bottom">
     <ul>
       <li class="photo-comment">
@@ -28,7 +27,6 @@
     </ul>
     加载更多按钮
   </div>
-</div>
 </template>
 
 <script>
@@ -38,7 +36,7 @@ export default {
   data() {
     return {
       comments: []
-    }
+    };
   },
   created() {
     // /photos/detail?id=37&page=2
@@ -51,7 +49,7 @@ export default {
       console.log('获取评论数据失败', err);
     });
   }
-}
+};
 </script>
 
 <style>

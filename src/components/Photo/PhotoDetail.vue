@@ -1,21 +1,21 @@
 <template>
-<div>
-  <Navbar title="图文详情" />
-  <div class="photo-title">
-    <p>{{imgInfo.title}}</p>
-    <span>{{imgInfo.createdAt | converTime('YYYY-MM-DD') }}</span>
-    <span>{{imgInfo.praise}}次浏览</span>
-    <span>分类: 民生经济</span>
+  <div>
+    <Navbar title="图文详情" />
+    <div class="photo-title">
+      <p>{{ imgInfo.title }}</p>
+      <span>{{ imgInfo.createdAt | converTime("YYYY-MM-DD") }}</span>
+      <span>{{ imgInfo.praise }}次浏览</span>
+      <span>分类: 民生经济</span>
 
-    <!-- <ul>
+      <!-- <ul>
       <li v-for="(thumImg, index) in thumImgages" :key="index">
         <a href="javascript:void(0)">
           <img :src="thumImg.src" alt="">
         </a>
       </li>
-    </ul> -->
+      </ul>-->
 
-    <vue-preview :slides="thumImgages"></vue-preview>
+      <vue-preview :slides="thumImgages"></vue-preview>
 
     <!-- 内容部分 -->
     <div class="photo-desc">
@@ -25,9 +25,8 @@
     <!-- 评论部分 -->
     <Comment :cid="$route.query.id" :entityType="1" />
   
-
+    </div>
   </div>
-</div>
 </template>
 
 <script>
@@ -55,18 +54,19 @@ export default {
         this.thumImgages = perms.data;
       })
     );
-    this.$axios.all([getImageInfo(), getThumImages()])
-    .then(this.$axios.spread((acct, perms) => {
-      //两个请求都执行
-      this.imgInfo = acct.data;
-      this.thumImgages = perms.data;
+    this.$axios.all([getImageInfo(), getThumImages()]).then(
+      this.$axios.spread((acct, perms) => {
+        //两个请求都执行
+        this.imgInfo = acct.data;
+        this.thumImgages = perms.data;
 
-      // this.thumImgages.forEach((item) => {
-      //   item.msrc = item.src;
-      //   item.w = 500;
-      //   item.h = 400;
-      // })
-    }));
+        // this.thumImgages.forEach((item) => {
+        //   item.msrc = item.src;
+        //   item.w = 500;
+        //   item.h = 400;
+        // })
+      })
+    );
   }
 };
 </script>
