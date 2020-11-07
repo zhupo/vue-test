@@ -17,16 +17,13 @@
       <li class="photo-comment">
         <div>
           <span>评论列表</span>
-          <span>44条评论</span>
+          <span>{{ comments.length }}条评论</span>
         </div>
       </li>
     </ul>
     <ul class="comment-list">
-      <li>
-        匿名用户1:大家好 2014-01-04
-      </li>
-      <li>
-        匿名用户2:大家好 2014-01-04
+      <li v-for="(comment, index) in comments" :key=index>
+        {{ comment.username }}: {{ comment.content }} {{ comment.createdAt | relativeTime}}
       </li>
     </ul>
     加载更多按钮
@@ -37,7 +34,7 @@
 <script>
 export default {
   name: "Comment",
-  props: ['cid'],
+  props: ['cid', 'entityType'],
   data() {
     return {
       comments: []
@@ -46,7 +43,7 @@ export default {
   created() {
     // /photos/detail?id=37&page=2
     let page = this.$route.query.page || '1';
-    this.$axios.get(`/api/comments/${this.cid}?page=${page}`)
+    this.$axios.get(`/api/comments?page=${page}&entityType=${this.entityType}&entityId=${this.cid}`)
     .then(res => {
       this.comments = res.data;
     })

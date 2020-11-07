@@ -23,7 +23,7 @@
     </div>
   
     <!-- 评论部分 -->
-    <Comment :cli="$route.query.id" />
+    <Comment :cid="$route.query.id" :entityType="1" />
   
 
   </div>

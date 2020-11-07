@@ -29,6 +29,9 @@ import Moment from "moment";
 Vue.filter("converTime", function(date, formatStr) {
   return Moment(date).format(formatStr);
 });
+Vue.filter('relativeTime', function(date) {
+  return Moment(date).fromNow();
+});
 
 //引入preview图片查看器
 import VuePreview from 'vue-preview'
