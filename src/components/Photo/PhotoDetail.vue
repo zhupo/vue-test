@@ -17,14 +17,13 @@
 
       <vue-preview :slides="thumImgages"></vue-preview>
 
-    <!-- 内容部分 -->
-    <div class="photo-desc">
-      <p v-html="imgInfo.content"></p>
-    </div>
-  
-    <!-- 评论部分 -->
-    <Comment :cid="$route.query.id" :entityType="1" />
-  
+      <!-- 内容部分 -->
+      <div class="photo-desc">
+        <p v-html="imgInfo.content"></p>
+      </div>
+
+      <!-- 评论部分 -->
+      <Comment :cid="$route.query.id" />
     </div>
   </div>
 </template>

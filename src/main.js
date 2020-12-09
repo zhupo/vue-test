@@ -26,10 +26,12 @@ Vue.component(Comment.name, Comment);
 
 //自定义moment全局过滤器
 import Moment from "moment";
+//设置中文显示
+Moment.locale("zh-cn");
 Vue.filter("converTime", function(date, formatStr) {
   return Moment(date).format(formatStr);
 });
-Vue.filter('relativeTime', function(date) {
+Vue.filter("relativeTime", function(date) {
   return Moment(date).fromNow();
 });
 

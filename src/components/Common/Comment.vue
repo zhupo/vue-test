@@ -8,10 +8,12 @@
         </div>
       </li>
       <li class="txt-comment">
-        <textarea cols="50" rows="10"></textarea>
+        <textarea v-model="content" cols="50" rows="10"></textarea>
       </li>
       <li>
-        发表评论按钮
+        <mt-button type="primary" size="large" @click="createComment"
+          >评论</mt-button
+        >
       </li>
       <li class="photo-comment">
         <div>
@@ -21,33 +23,69 @@
       </li>
     </ul>
     <ul class="comment-list">
-      <li v-for="(comment, index) in comments" :key=index>
-        {{ comment.username }}: {{ comment.content }} {{ comment.createdAt | relativeTime}}
+      <li v-for="(comment, index) in comments" :key="index">
+        {{ comment.username }}: {{ comment.content }}
+        {{ comment.createdAt | relativeTime }}
       </li>
     </ul>
-    加载更多按钮
+    <mt-button type="danger" size="large" @click="loadMore(page)"
+      >加载更多</mt-button
+    >
   </div>
 </template>
 
 <script>
 export default {
   name: "Comment",
-  props: ['cid', 'entityType'],
+  props: ["cid"],
   data() {
     return {
-      comments: []
+      comments: [],
+      page: 1,
+      content: ""
     };
   },
   created() {
     // /photos/detail?id=37&page=2
-    let page = this.$route.query.page || '1';
-    this.$axios.get(`/api/comments?page=${page}&entityType=${this.entityType}&entityId=${this.cid}`)
-    .then(res => {
-      this.comments = res.data;
-    })
-    .catch(err => {
-      console.log('获取评论数据失败', err);
-    });
+    this.page = this.$route.query.page || 1;
+    //第一次加载
+    this.loadMore();
+  },
+  methods: {
+    //加载更多评论
+    loadMore(page) {
+      this.$axios
+        .get(`/api/comments?page=${this.page}&entityId=${this.cid}`)
+        .then(res => {
+          let data = res.data;
+          if (data.length === 0) {
+            this.$toast("没有数据了");
+          }
+          if (page) {
+            //表示加载更多
+            this.comments = this.comments.concat(data);
+          } else {
+            //表示第一次加载
+            this.comments = data;
+          }
+          this.page++;
+          console.log(this.page);
+        })
+        .catch(err => {
+          console.log("获取评论数据失败", err);
+        });
+    },
+    //创建评论
+    createComment() {
+      this.$axios
+        .post(`api/comments`, "content=" + this.content)
+        .then(res => {
+          console.log(res.data);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
   }
 };
 </script>
@@ -80,6 +118,10 @@ export default {
 
 .txt-comment textarea {
   margin-bottom: 5px;
+}
+.comment-list {
+  height: 100%;
+  position: relative;
 }
 .comment-list li {
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
