@@ -77,8 +77,12 @@ export default {
     },
     //创建评论
     createComment() {
+      let data = {
+        content: this.content,
+        entityId: this.cid
+      };
       this.$axios
-        .post(`api/comments`, "content=" + this.content)
+        .post(`api/comments`, data)
         .then(res => {
           console.log(res.data);
         })
