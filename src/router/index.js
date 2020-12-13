@@ -8,6 +8,7 @@ import NewList from "@components/New/NewList";
 import NewsDetail from "@components/New/NewsDetail";
 import PhotoList from "@components/Photo/PhotoList";
 import PhotoDetail from "@components/Photo/PhotoDetail";
+import GoodsList from "@components/Goods/GoodsList";
 
 //应用路由
 Vue.use(VueRouter);
@@ -62,6 +63,11 @@ const routes = [
     path: "/photos/detail",
     name: "photo.detail",
     component: PhotoDetail
+  },
+  {
+    path: "/goods/list/:page",
+    name: "good.list",
+    component: GoodsList
   }
 ];
 

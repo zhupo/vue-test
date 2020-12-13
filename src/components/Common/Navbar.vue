@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <h3 @click="goBack" class="back">《</h3>
-    <h3 class="desc_title">{{title}}</h3>
+    <h3 class="desc_title">{{ title }}</h3>
   </div>
 </template>
 
@@ -27,9 +27,11 @@ export default {
   line-height: 40px;
   position: relative;
   background-color: #fd8008;
+  /* top: -1px; */
 }
 h3 {
   float: left;
+  color: #ffffff;
 }
 h3.back {
   margin-left: 15px;

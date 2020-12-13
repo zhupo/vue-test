@@ -23,7 +23,7 @@
       </div>
 
       <!-- 评论部分 -->
-      <Comment :cid="$route.query.id" />
+      <Comment class="photo-comments" :cid="$route.query.id" />
     </div>
   </div>
 </template>
@@ -53,19 +53,19 @@ export default {
         this.thumImgages = perms.data;
       })
     );
-    this.$axios.all([getImageInfo(), getThumImages()]).then(
-      this.$axios.spread((acct, perms) => {
-        //两个请求都执行
-        this.imgInfo = acct.data;
-        this.thumImgages = perms.data;
+    // this.$axios.all([getImageInfo(), getThumImages()]).then(
+    //   this.$axios.spread((acct, perms) => {
+    //     //两个请求都执行
+    //     this.imgInfo = acct.data;
+    //     this.thumImgages = perms.data;
 
-        // this.thumImgages.forEach((item) => {
-        //   item.msrc = item.src;
-        //   item.w = 500;
-        //   item.h = 400;
-        // })
-      })
-    );
+    //     // this.thumImgages.forEach((item) => {
+    //     //   item.msrc = item.src;
+    //     //   item.w = 500;
+    //     //   item.h = 400;
+    //     // })
+    //   })
+    // );
   }
 };
 </script>
@@ -76,6 +76,9 @@ export default {
   font-weight: 600;
   color: #0f80ff;
   margin: 15px 0;
+}
+.photo-comments {
+  margin-bottom: 95px;
 }
 
 .photo-title span {

@@ -34,6 +34,14 @@ Vue.filter("converTime", function(date, formatStr) {
 Vue.filter("relativeTime", function(date) {
   return Moment(date).fromNow();
 });
+Vue.filter("controllerShow", function(str, num) {
+  if (str.length > num) {
+    //如果字符串长度大于num，则截取0到num - 1位
+    return str.substr(0, num - 1) + "...";
+  } else {
+    return str;
+  }
+});
 
 //引入preview图片查看器
 import VuePreview from "vue-preview";

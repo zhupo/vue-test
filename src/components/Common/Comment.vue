@@ -85,6 +85,9 @@ export default {
         .post(`api/comments`, data)
         .then(res => {
           console.log(res.data);
+          this.content = "";
+          this.page = 1;
+          this.loadMore();
         })
         .catch(err => {
           console.log(err);
