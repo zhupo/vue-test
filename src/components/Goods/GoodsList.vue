@@ -12,7 +12,7 @@
           <ul class="page-loadmore-list">
             <li v-for="(goodList, index) in goods" :key="index">
               <a href="javascript:;">
-                <img src="goodList.url" alt="" />
+                <img :src="hostUrl + goodList.url" alt="" />
                 <div class="title">
                   {{ goodList.title | controllerShow(14) }}
                 </div>
@@ -44,29 +44,46 @@ export default {
     return {
       page: this.$route.params.page,
       goods: [],
-      allLoaded: false
+      allLoaded: false,
+      hostUrl: "http://photo.com/"
     };
   },
   created() {
-    this.$axios
-      .get(`api/goods?page=${this.page}`)
-      .then(res => {
-        this.goods = res.data;
-      })
-      .catch(err => {
-        console.log("商品列表获取失败", err);
-      });
+    this.loadGoodsByPage();
   },
   methods: {
     //上拉加载
     loadBottom() {
-      console.log("上拉调用了");
+      this.loadGoodsByPage();
+      // console.log("上拉调用了");
       //上拉加载数据
+
+      //如果给标签绑定ref = 'xxx' 属性使用this.$refs.xxx 获取原生的js DOM对象
+      //如果是给组建绑定ref属性，那么this.$refs.xxx获取的是当前的组建对象
       //通知状态发生改变
       this.$refs.loadmore.onBottomLoaded();
     },
     handleBottomChange(status) {
       console.log(status);
+    },
+    loadGoodsByPage() {
+      this.$axios
+        .get(`api/goods?page=${this.page}`)
+        .then(res => {
+          if (res.data.length < 1) {
+            this.$toast("没有数据了.");
+            this.allLoaded = true;
+          }
+          if (this.page == 1) {
+            this.goods = res.data;
+          } else {
+            this.goods = this.goods.concat(res.data);
+          }
+          this.page++;
+        })
+        .catch(err => {
+          console.log("商品列表获取失败", err);
+        });
     }
   }
 };

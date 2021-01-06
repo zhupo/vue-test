@@ -6,7 +6,7 @@
         <li v-for="newList in news" :key="newList.id">
           <router-link :to="{ name: 'detail', query: { id: newList.id } }">
             <div class="new_img">
-              <img :src="newList.url" alt />
+              <img :src="hostUrl + newList.url" alt />
             </div>
             <div class="content">
               <p class="title">{{ newList.title }}</p>
@@ -33,7 +33,8 @@ export default {
   data() {
     return {
       msg: "我是新闻列表页面",
-      news: []
+      news: [],
+      hostUrl: "http://photo.com/"
     };
   },
   created() {

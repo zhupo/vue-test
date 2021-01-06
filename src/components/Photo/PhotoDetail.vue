@@ -34,7 +34,8 @@ export default {
   data() {
     return {
       imgInfo: {},
-      thumImgages: []
+      thumImgages: [],
+      hostUrl: "http://photo.com/"
     };
   },
   created() {
@@ -51,6 +52,10 @@ export default {
         //两个请求都执行
         this.imgInfo = acct.data;
         this.thumImgages = perms.data;
+        this.thumImgages.forEach(item => {
+          item.src = this.hostUrl + item.src;
+          item.msrc = this.hostUrl + item.msrc;
+        });
       })
     );
     // this.$axios.all([getImageInfo(), getThumImages()]).then(

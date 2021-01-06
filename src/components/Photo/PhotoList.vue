@@ -20,7 +20,7 @@
           <router-link :to="{ name: 'photo.detail', query: { id: item.id } }">
             <!-- <img :src="item.url" alt=""> -->
             <!-- mint-ui 的懒加载 -->
-            <img v-lazy="item.url" />
+            <img v-lazy="hostUrl + item.url" />
           </router-link>
           <p>
             <span>{{ item.title }}</span>
@@ -40,7 +40,8 @@ export default {
     return {
       categories: [],
       imgList: [],
-      currentIndex: 0
+      currentIndex: 0,
+      hostUrl: "http://photo.com/"
     };
   },
   methods: {

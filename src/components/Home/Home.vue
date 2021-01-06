@@ -3,7 +3,7 @@
     <!-- 轮播图 -->
     <mt-swipe :auto="4000" class="mt-swipe">
       <mt-swipe-item v-for="(item, index) in images" :key="index">
-        <img :src="item.url" />
+        <img :src="hostUrl + item.url" />
       </mt-swipe-item>
     </mt-swipe>
     <!-- 九宫格 -->
@@ -11,7 +11,7 @@
       <ul>
         <li v-for="(grid, index) in grids" :key="index">
           <router-link :to="grid.router">
-            <img :src="grid.url" alt />
+            <img :src="hostUrl + grid.url" alt />
             <p>{{ grid.title }}</p>
           </router-link>
         </li>
@@ -27,7 +27,8 @@ export default {
     return {
       images: [],
       baseUrl: location.origin,
-      grids: []
+      grids: [],
+      hostUrl: "http://photo.com/"
     };
   },
   components: {

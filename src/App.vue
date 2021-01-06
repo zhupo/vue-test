@@ -23,7 +23,7 @@
             @click.native="changeHash(index)"
             :class="{ 'link-active': index == currentIndex }"
           >
-            <img :src="tab.imgSrc" alt />
+            <img :src="hostUrl + tab.imgSrc" alt />
             <p>{{ tab.title }}</p>
           </router-link>
         </li>
@@ -50,36 +50,36 @@
   </div>
 </template>
 <script>
-import index from "@assets/index.png";
-import vip from "@assets/member.png";
-import shopcart from "@assets/shopping-cart.png";
-import mine from "@assets/mine.png";
-let tabs = [
-  {
-    id: 1,
-    title: "首页",
-    imgSrc: index,
-    routerName: { name: "home" }
-  },
-  {
-    id: 2,
-    title: "会员",
-    imgSrc: vip,
-    routerName: { name: "vip" }
-  },
-  {
-    id: 3,
-    title: "购物车",
-    imgSrc: shopcart,
-    routerName: { name: "shopcart" }
-  },
-  {
-    id: 4,
-    title: "我的",
-    imgSrc: mine,
-    routerName: { name: "mine" }
-  }
-];
+// import index from "@assets/index.png";
+// import vip from "@assets/member.png";
+// import shopcart from "@assets/shopping-cart.png";
+// import mine from "@assets/mine.png";
+// let tabs = [
+//   {
+//     id: 1,
+//     title: "首页",
+//     imgSrc: index,
+//     routerName: { name: "home" }
+//   },
+//   {
+//     id: 2,
+//     title: "会员",
+//     imgSrc: vip,
+//     routerName: { name: "vip" }
+//   },
+//   {
+//     id: 3,
+//     title: "购物车",
+//     imgSrc: shopcart,
+//     routerName: { name: "shopcart" }
+//   },
+//   {
+//     id: 4,
+//     title: "我的",
+//     imgSrc: mine,
+//     routerName: { name: "mine" }
+//   }
+// ];
 
 export default {
   name: "App",
@@ -87,9 +87,20 @@ export default {
     return {
       selected: "",
       fixed: true,
-      tabs: tabs,
-      currentIndex: 0
+      tabs: [],
+      currentIndex: 0,
+      hostUrl: "http://photo.com/"
     };
+  },
+  created() {
+    this.$axios
+      .get("api/images/tables")
+      .then(res => {
+        this.tabs = res.data.items;
+      })
+      .catch(err => {
+        console.log("标签获取失败", err);
+      });
   },
   methods: {
     changeHash(index) {

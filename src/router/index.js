@@ -35,7 +35,7 @@ const routes = [
   },
   {
     path: "/shopcart",
-    name: "shopcart",
+    name: "shopCart",
     component: ShopCart
   },
   {
