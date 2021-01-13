@@ -2,16 +2,23 @@
   <div>
     <Navbar title="商品列表" />
     <div class="page-loadmore">
-      <div class="page-loadmore-wrapper">
+      <div
+        class="page-loadmore-wrapper"
+        ref="wrapper"
+        :style="{ height: wrapperHeight + 'px' }"
+      >
         <mt-loadmore
           :bottom-method="loadBottom"
           @bottom-status-change="handleBottomChange"
           :bottom-all-loaded="allLoaded"
+          :auto-fill="autoFill"
           ref="loadmore"
         >
           <ul class="page-loadmore-list">
             <li v-for="(goodList, index) in goods" :key="index">
-              <a href="javascript:;">
+              <router-link
+                :to="{ name: 'good.detail', params: { id: goodList.id } }"
+              >
                 <img :src="hostUrl + goodList.url" alt="" />
                 <div class="title">
                   {{ goodList.title | controllerShow(14) }}
@@ -28,7 +35,7 @@
                     <div class="count">剩{{ goodList.stockQuantity }}件</div>
                   </div>
                 </div>
-              </a>
+              </router-link>
             </li>
           </ul>
         </mt-loadmore>
@@ -38,6 +45,19 @@
 </template>
 
 <script>
+/*
+mt-loadmore 中的属性
+
+1, loadBottom函数
+2，机制bottomLoad :bottom-all-loaded 默认为false可以上拉，为true时禁止上拉
+3，auto-fill 默认为true，自动会检测父容器，并调用loadBottom直到撑满父容器
+4，pull 拉动未满足70px,drop达到70px，loading加载中
+5，loadmore 组件对象的onBottomLoaded()通知结束loading进入pull状态
+6，在组件中写ref在js中通过this.$refs.xxx获取的组件对象
+   在普通标签写ref在js中国通过this.$refs.xxx获取的dom对象
+7, 上拉加载更多公式
+  进入检测机制 ==》 可视的高度 + 页面卷起的高度 = 设备的高度
+ */
 export default {
   name: "GoodsList",
   data() {
@@ -45,17 +65,24 @@ export default {
       page: this.$route.params.page,
       goods: [],
       allLoaded: false,
-      hostUrl: "http://photo.com/"
+      hostUrl: "http://photo.com/",
+      wrapperHeight: 0,
+      autoFill: false
     };
   },
   created() {
     this.loadGoodsByPage();
   },
+  mounted() {
+    this.wrapperHeight =
+      document.documentElement.clientHeight -
+      this.$refs.wrapper.getBoundingClientRect().top;
+  },
   methods: {
     //上拉加载
     loadBottom() {
       this.loadGoodsByPage();
-      // console.log("上拉调用了");
+      console.log("上拉调用了");
       //上拉加载数据
 
       //如果给标签绑定ref = 'xxx' 属性使用this.$refs.xxx 获取原生的js DOM对象
@@ -72,6 +99,7 @@ export default {
         .then(res => {
           if (res.data.length < 1) {
             this.$toast("没有数据了.");
+            //如果为true，表示所有数据的家在完成。
             this.allLoaded = true;
           }
           if (this.page == 1) {
