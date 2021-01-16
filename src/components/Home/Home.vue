@@ -1,11 +1,12 @@
 <template>
   <div class="home" id="home">
     <!-- 轮播图 -->
-    <mt-swipe :auto="4000" class="mt-swipe">
+    <!-- <mt-swipe :auto="4000" class="mt-swipe">
       <mt-swipe-item v-for="(item, index) in images" :key="index">
         <img :src="hostUrl + item.url" />
       </mt-swipe-item>
-    </mt-swipe>
+    </mt-swipe> -->
+    <Swipe url="/api/images" myHeight="250px" />
     <!-- 九宫格 -->
     <div class="list">
       <ul>
@@ -25,7 +26,7 @@ export default {
   name: "Home",
   data() {
     return {
-      images: [],
+      // images: [],
       baseUrl: location.origin,
       grids: [],
       hostUrl: "http://photo.com/"
@@ -35,15 +36,15 @@ export default {
     // HelloWorld
   },
   created() {
-    this.$axios
-      .get("/api/images")
-      .then(res => {
-        console.log(res.data.items);
-        this.images = res.data.items;
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    // this.$axios
+    //   .get("/api/images")
+    //   .then(res => {
+    //     console.log(res.data.items);
+    //     this.images = res.data.items;
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
 
     this.$axios
       .get("/api/images/show-off")
@@ -58,14 +59,6 @@ export default {
 </script>
 
 <style scoped>
-.mt-swipe {
-  width: 100%;
-  height: 200px;
-}
-.mt-swipe img {
-  width: 100%;
-  height: 100%;
-}
 .list {
   width: 100%;
   padding-top: 25px;

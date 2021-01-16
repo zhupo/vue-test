@@ -34,6 +34,10 @@ figure a {
   display: inline-block;
 }
 
-figure a img {
+/* figure a img {
+  width: 100px;
+} */
+
+img {
   width: 100px;
 }

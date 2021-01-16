@@ -1,6 +1,6 @@
 <template>
   <div class="detail">
-    <Navbar title="新闻详情" />
+    <Navbar :title="title" />
     <div class="item">
       <p>{{ detail.title }}</p>
       <div>
@@ -21,6 +21,12 @@ export default {
     return {
       detail: {}
     };
+  },
+  props: {
+    title: {
+      type: String,
+      default: "Vue!"
+    }
   },
   created() {
     let id = this.$route.query.id;

@@ -53,7 +53,11 @@ const routes = [
   {
     path: "/news/detail",
     name: "detail",
-    component: NewsDetail
+    component: NewsDetail,
+    //来源：Vue Router 路由组建传参数
+    props: {
+      title: "新闻详情"
+    }
   },
   {
     path: "/photos/list/:categoryId",
@@ -74,6 +78,15 @@ const routes = [
     path: "/goods/detail/:id",
     name: "good.detail",
     component: GoodsDetail
+  },
+  //商品图文介绍
+  {
+    path: "/goods/photo/info",
+    name: "photo.info",
+    component: NewsDetail,
+    props: {
+      title: "图文介绍"
+    }
   }
 ];
 

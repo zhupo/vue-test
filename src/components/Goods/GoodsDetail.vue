@@ -1,10 +1,8 @@
 <template>
-  <div>
+  <div class="detail">
     <Navbar title="商品详情" />
     <div class="outer-swiper">
-      <div class="swiper">
-        我真的是轮播图
-      </div>
+      <Swipe class="swiper" :url="url" myHeight="250px" />
     </div>
     <div class="product-desc">
       <ul>
@@ -20,16 +18,16 @@
           购买数量: <span>-</span><span>1</span><span>+</span>
         </li>
         <li>
-          <mi-buttom type="primary" size="small">立即购买</mi-buttom>
-          <mt-buttom type="danger" size="small">加入购物车</mt-buttom>
+          <mt-button type="primary" size="small">立即购买</mt-button>
+          <mt-button type="danger" size="small">加入购物车</mt-button>
         </li>
       </ul>
     </div>
     <div class="ball"></div>
     <div class="product-props">
       <ul>
-        <li>商品参数</li>
-        <li>商品货号</li>
+        <li>商品参数: 512G内存 8核 16G运行内存</li>
+        <li>商品货号: 001</li>
         <li>库存情况: 999件</li>
         <li>上架时间: 2021-01-13</li>
       </ul>
@@ -37,7 +35,13 @@
     <div class="product-info">
       <ul>
         <li>
-          <mt-button type="primary" size="large" plain>图文介绍</mt-button>
+          <mt-button
+            type="primary"
+            size="large"
+            plain
+            @click.native="showShopInfo"
+            >图文介绍</mt-button
+          >
         </li>
         <li>
           <mt-button type="danger" size="large" plain>商品评论</mt-button>
@@ -52,13 +56,28 @@ export default {
   name: "GoodsDetail",
   data() {
     return {
-      test: "test123"
+      url: `/api/goods/${this.$route.params.id}`
     };
+  },
+  created() {},
+  methods: {
+    showShopInfo() {
+      //通过动态路由进行路由跳转
+      this.$router.push({
+        name: "photo.info",
+        query: {
+          id: this.$route.params.id
+        }
+      });
+    }
   }
 };
 </script>
 
 <style scoped>
+.detail {
+  padding-bottom: 65px;
+}
 .ball-enter-active {
   /**给1秒的事件小球进入动画效果 */
   animation: bounce-in 1s;
@@ -102,14 +121,6 @@ export default {
 .product-props ul,
 .product-info ul {
   padding: 0;
-}
-.product-desc ul li,
-.product-props ul li,
-.product-info ul li {
-  list-style: none;
-  font-size: 15px;
-  color: rgba(0, 0, 0, 0.5);
-  margin-top: 8px;
 }
 .product-desc ul li,
 .product-props ul li,

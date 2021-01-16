@@ -24,6 +24,10 @@ Vue.component(Navbar.name, Navbar);
 import Comment from "@components/Common/Comment";
 Vue.component(Comment.name, Comment);
 
+//注册全局的轮播图组建
+import Swipe from "@components/Common/Swipe";
+Vue.component(Swipe.name, Swipe);
+
 //自定义moment全局过滤器
 import Moment from "moment";
 //设置中文显示
@@ -34,6 +38,7 @@ Vue.filter("converTime", function(date, formatStr) {
 Vue.filter("relativeTime", function(date) {
   return Moment(date).fromNow();
 });
+//自定义全局字符串截取过滤器
 Vue.filter("controllerShow", function(str, num) {
   if (str.length > num) {
     //如果字符串长度大于num，则截取0到num - 1位
@@ -61,7 +66,7 @@ Axios.interceptors.request.use(
     // 在发送请求之前做些什么
     //加载提示框
     Mint.Indicator.open({
-      text: "玩命家在ing..."
+      text: "玩命加载ing..."
     });
     return config;
   },
