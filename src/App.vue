@@ -24,6 +24,9 @@
             :class="{ 'link-active': index == currentIndex }"
           >
             <img :src="hostUrl + tab.imgSrc" alt />
+            <mt-badge size="small" color="#FC0107" v-if="index === 2">
+              {{ pickNum }}
+            </mt-badge>
             <p>{{ tab.title }}</p>
           </router-link>
         </li>
@@ -80,7 +83,7 @@
 //     routerName: { name: "mine" }
 //   }
 // ];
-
+import GoodsTool from "@/GoodsTool";
 export default {
   name: "App",
   data() {
@@ -89,10 +92,15 @@ export default {
       fixed: true,
       tabs: [],
       currentIndex: 0,
-      hostUrl: "http://photo.com/"
+      hostUrl: "http://photo.com/",
+      pickNum: 0 //表示购物车商品数量
     };
   },
   created() {
+    //绑定公交车事件
+    this.$bus.$on("sendPickNum", data => {
+      this.pickNum += data;
+    });
     this.$axios
       .get("api/images/tables")
       .then(res => {
@@ -101,6 +109,8 @@ export default {
       .catch(err => {
         console.log("标签获取失败", err);
       });
+    //获取国务车的总数
+    this.pickNum = GoodsTool.getTotalCount();
   },
   methods: {
     changeHash(index) {
@@ -150,6 +160,7 @@ export default {
   width: 100%;
   height: 100%;
   padding-top: 10px;
+  position: relative;
 }
 .tabBar ul li a.link-active {
   background-color: #ccff66;
@@ -159,5 +170,10 @@ export default {
 }
 .tabBar ul li a img {
   width: 22px;
+}
+.mint-badge .is-size-small {
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 </style>

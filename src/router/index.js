@@ -10,6 +10,8 @@ import PhotoList from "@components/Photo/PhotoList";
 import PhotoDetail from "@components/Photo/PhotoDetail";
 import GoodsList from "@components/Goods/GoodsList";
 import GoodsDetail from "@components/Goods/GoodsDetail";
+// import Comment from "@components/Common/Comment";
+import Comment from "@components/Goods/GoodsComment";
 
 //应用路由
 Vue.use(VueRouter);
@@ -87,6 +89,11 @@ const routes = [
     props: {
       title: "图文介绍"
     }
+  },
+  {
+    path: "/goods/comment",
+    name: "good.comment",
+    component: Comment
   }
 ];
 

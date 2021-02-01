@@ -13,6 +13,11 @@ import Axios from "axios";
 Vue.prototype.$axios = Axios;
 Vue.config.productionTip = false;
 
+//将bus对象挂在到vue的原型上公交车对象
+import EventBus from "./EventBus";
+// Vue.use(EventBus);
+Vue.prototype.$bus = EventBus;
+
 //引入全局css
 import "../public/css/global.css";
 
